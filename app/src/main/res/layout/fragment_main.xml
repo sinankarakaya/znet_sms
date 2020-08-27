@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bgapp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"/>
+
+
+      <TextView
+          android:id="@+id/znet"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="42sp"
+          android:text="ZNET"
+          android:textColor="#FFFFFF"
+          android:textAlignment="center"
+          android:layout_marginTop="20dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+
+    <ImageView
+        android:id="@+id/smsImage"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/znet"/>
+
+    <LinearLayout
+        android:id="@+id/deviceIDBox"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ripple"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smsImage">
+
+        <TextView
+            android:id="@+id/deviceIdTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="34sp"
+            android:text="Device ID"
+            android:layout_marginTop="20dp"
+            android:textColor="#848484"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/deviceId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="######"
+            android:layout_marginTop="40dp"
+            android:textColor="#1C1C60"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+
+
+    <!--
+    <Button
+        android:id="@+id/permissionControl"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="156dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="İzinleri Kontrol Et"
+        android:textAllCaps="false"
+        android:background="@drawable/bgbuttonpermission"
+        android:textSize="22sp"
+        android:textColor="#8E7324"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/exitApp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Uygulamayı Kapat"
+        android:textAllCaps="false"
+        android:background="@drawable/bgbutonclose"
+        android:textSize="22sp"
+        android:textColor="#8E7324"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    -->
+    <Button
+        android:id="@+id/serviceButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Servisi Başlat"
+        android:textAllCaps="false"
+        android:background="@drawable/bgbutton"
+        android:textSize="22sp"
+        android:textColor="#8E7324"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
