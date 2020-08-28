@@ -5,27 +5,22 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.sinan.sms.MainActivity;
 import com.sinan.sms.R;
 
@@ -35,6 +30,7 @@ public class MainFragment extends Fragment {
 
     private View parentView;
     private TextView deviceKey;
+    private Button serviceButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,10 +42,24 @@ public class MainFragment extends Fragment {
 
     private void setUpViews() {
         final MainActivity parentActivity = (MainActivity) getActivity();
-        String device_unique_id = this.getDeviceUniqueID(parentActivity);
         checkPermission(parentActivity);
+
+        String device_unique_id = this.getDeviceUniqueID(parentActivity);
         deviceKey = (TextView)parentView.findViewById(R.id.deviceId);
         deviceKey.setText(device_unique_id);
+        MainActivity.deviceID = device_unique_id;
+
+        LinearLayout deviceIDBox = (LinearLayout) parentView.findViewById(R.id.deviceIDBox);
+        deviceIDBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                copyClipboard(parentActivity);
+            }
+        });
+
+
+        //serviceButton = (Button)parentView.findViewById(R.id.serviceButton);
+
     }
 
     public String getDeviceUniqueID(Activity activity){
@@ -62,7 +72,9 @@ public class MainFragment extends Fragment {
         Dexter.withContext(activity)
                 .withPermissions(
                         Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.READ_SMS
+                        Manifest.permission.READ_SMS,
+                        Manifest.permission.RECEIVE_SMS,
+                        Manifest.permission.INTERNET
                 ).withListener(new MultiplePermissionsListener() {
             @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if(!report.areAllPermissionsGranted()){
@@ -87,5 +99,18 @@ public class MainFragment extends Fragment {
             }
         });
         builder.show();
+    }
+
+    public void copyClipboard(final Activity activity){
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(getDeviceUniqueID(activity));
+            Toast.makeText(activity,"Cihaz ID'si panoya kopyalandı.",Toast.LENGTH_LONG).show();
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", getDeviceUniqueID(activity));
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(activity,"Cihaz ID'si panoya kopyalandı.",Toast.LENGTH_LONG).show();
+        }
     }
 }

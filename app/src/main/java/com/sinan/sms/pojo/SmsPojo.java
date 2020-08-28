@@ -2,31 +2,31 @@ package com.sinan.sms.pojo;
 
 public class SmsPojo {
 
-    private String unicPK;
-    private String sms;
-    private String code;
+    private String deviceID;
+    private String sender;
+    private String message;
 
-    public String getUnicPK() {
-        return unicPK;
+    public String getDeviceID() {
+        return deviceID;
     }
 
-    public void setUnicPK(String unicPK) {
-        this.unicPK = unicPK;
+    public void setDeviceID(String deviceID) {
+        this.deviceID = deviceID;
     }
 
-    public String getSms() {
-        return sms;
+    public String getSender() {
+        return sender;
     }
 
-    public void setSms(String sms) {
-        this.sms = sms;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getCode() {
-        return code;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
