@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RequestSender {
-    final static String url = "https://poscihazi.com/sms_v2.php?action=create";
+    static String url = "https://poscihazi.com/sms_v2.php?action=create";
     //private static String url = "https://sinan.free.beeceptor.com/sms_v2?action=create";
 
     public static void sendRequest(Context context, SmsPojo sms){
