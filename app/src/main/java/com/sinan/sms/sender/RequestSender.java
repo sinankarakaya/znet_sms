@@ -17,10 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RequestSender {
-    static String url = "https://poscihazi.com/sms_v2.php?action=create";
-    //private static String url = "https://sinan.free.beeceptor.com/sms_v2?action=create";
+    //static String url = "https://poscihazi.com/sms_v2.php?action=create";
+    private static String url = "https://sinantest.free.beeceptor.com/sms_v2?action=create";
 
-    public static void sendRequest(Context context, SmsPojo sms){
+    public static void sendRequest(final Context context, SmsPojo sms){
         String secretKey="";
         try {
             secretKey = sha1(sms.getMessage()+sms.getDeviceID()+getDateNow()+"create");
@@ -35,13 +35,13 @@ public class RequestSender {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Toast.makeText(context,"Sunucuya Gönderildi",Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Gönderim Hatası",Toast.LENGTH_SHORT).show();
+                    }
         });
         queue.add(stringRequest);
     }

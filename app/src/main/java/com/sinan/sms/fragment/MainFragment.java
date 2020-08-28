@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -34,8 +33,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parentView = inflater.inflate(R.layout.fragment_main,
-                container, false);
+        parentView = inflater.inflate(R.layout.fragment_main, container, false);
         setUpViews();
         return parentView;
     }
@@ -56,9 +54,6 @@ public class MainFragment extends Fragment {
                 copyClipboard(parentActivity);
             }
         });
-
-
-        //serviceButton = (Button)parentView.findViewById(R.id.serviceButton);
 
     }
 

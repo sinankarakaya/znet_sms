@@ -12,8 +12,9 @@ import android.widget.Toast;
 
 import com.sinan.sms.MainActivity;
 
-public class ReceiveSms extends BroadcastReceiver {
+public class ReceiveSmsOld {//extends BroadcastReceiver {
 
+    /*
     private static final String TAG = ReceiveSms.class.getSimpleName();
     public static final String pdu_type = "pdus";
 
@@ -49,4 +50,5 @@ public class ReceiveSms extends BroadcastReceiver {
         }
 
     }
+     */
 }

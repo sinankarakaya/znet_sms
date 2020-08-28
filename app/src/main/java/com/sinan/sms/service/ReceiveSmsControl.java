@@ -103,7 +103,7 @@ public class ReceiveSmsControl extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("ZNET SMS Service")
                 .setContentText("ÇALIŞIYOR...")
-                .setSmallIcon(R.drawable.sms)
+                .setSmallIcon(R.mipmap.sms_icon)
                 .setContentIntent(contentIntent)
                 .setOngoing(true)
                 .build();

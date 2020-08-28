@@ -31,12 +31,14 @@
 
     <ImageView
         android:id="@+id/smsImage"
-        android:layout_width="340dp"
-        android:layout_height="340dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/sms"
+        app:srcCompat="@mipmap/sms"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/znet"/>
@@ -80,60 +82,5 @@
             />
 
     </LinearLayout>
-
-
-
-    <!--
-    <Button
-        android:id="@+id/permissionControl"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="156dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="İzinleri Kontrol Et"
-        android:textAllCaps="false"
-        android:background="@drawable/bgbuttonpermission"
-        android:textSize="22sp"
-        android:textColor="#8E7324"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
-        android:id="@+id/exitApp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="86dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="Uygulamayı Kapat"
-        android:textAllCaps="false"
-        android:background="@drawable/bgbutonclose"
-        android:textSize="22sp"
-        android:textColor="#8E7324"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <Button
-        android:id="@+id/serviceButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="Servisi Başlat"
-        android:textAllCaps="false"
-        android:background="@drawable/bgbutton"
-        android:textSize="22sp"
-        android:textColor="#8E7324"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

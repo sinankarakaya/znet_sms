@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainActivity = this;
         setContentView(R.layout.activity_main);
-        changeFragment(new MainFragment());
         this.startService(new Intent(this, ReceiveSmsControl.class));
+        changeFragment(new MainFragment());
     }
 
     @Override
