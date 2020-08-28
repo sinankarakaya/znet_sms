@@ -23,7 +23,7 @@ public class RequestSender {
     public static void sendRequest(Context context, SmsPojo sms){
         String secretKey="";
         try {
-            secretKey = sha1(sms.getMessage()+"."+sms.getDeviceID()+"."+getDateNow());
+            secretKey = sha1(sms.getMessage()+sms.getDeviceID()+getDateNow()+"create");
         } catch (NoSuchAlgorithmException e) {
             Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG);
         }
@@ -57,7 +57,8 @@ public class RequestSender {
     }
 
     static String getDateNow(){
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH:mm:ss");
+        //SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH:mm:ss");
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }
