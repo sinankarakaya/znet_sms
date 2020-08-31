@@ -3,24 +3,40 @@ package com.sinan.sms.sender;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.sinan.sms.pojo.SmsPojo;
 
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestSender {
-    //static String url = "https://poscihazi.com/sms_v2.php?action=create";
-    private static String url = "https://sinantest.free.beeceptor.com/sms_v2?action=create";
+    private final static String url = "https://poscihazi.com";
 
-    public static void sendRequest(final Context context, SmsPojo sms){
+
+
+    public static void sendRequest(final Context context, final SmsPojo sms){
+        String sendUrl = url+"/sms_v2.php?action=create";
+
         String secretKey="";
         try {
             secretKey = sha1(sms.getMessage()+sms.getDeviceID()+getDateNow()+"create");
@@ -28,10 +44,11 @@ public class RequestSender {
             Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG);
         }
 
-        url+="&deviceID="+sms.getDeviceID()+"&sender="+sms.getSender()+"&message="+sms.getMessage()+"&key="+secretKey;
+        sendUrl+="&deviceID="+sms.getDeviceID()+"&sender="+sms.getSender()+"&message="+sms.getMessage()+"&key="+secretKey;
 
-        RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        final RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+
+        final StringRequest stringRequest = new StringRequest(Request.Method.GET, sendUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -40,9 +57,16 @@ public class RequestSender {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context,"Gönderim Hatası",Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(context,"Gönderim Hatası"+error.getMessage(),Toast.LENGTH_SHORT).show();
                     }
         });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         queue.add(stringRequest);
     }
 
