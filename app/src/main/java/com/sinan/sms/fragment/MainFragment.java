@@ -69,6 +69,8 @@ public class MainFragment extends Fragment {
                         Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.READ_SMS,
                         Manifest.permission.RECEIVE_SMS,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.INTERNET
                 ).withListener(new MultiplePermissionsListener() {
             @Override public void onPermissionsChecked(MultiplePermissionsReport report) {

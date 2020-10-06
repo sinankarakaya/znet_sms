@@ -31,10 +31,9 @@ import java.util.Map;
 
 public class RequestSender {
     private final static String url = "https://poscihazi.com";
+    private final static SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH");
 
-
-
-    public static void sendRequest(final Context context, final SmsPojo sms){
+    public static void sendRequest(final Context context, final SmsPojo sms, final RequestQueue queue){
         String sendUrl = url+"/sms_v2.php?action=create";
 
         String secretKey="";
@@ -46,9 +45,7 @@ public class RequestSender {
 
         sendUrl+="&deviceID="+sms.getDeviceID()+"&sender="+sms.getSender()+"&message="+sms.getMessage()+"&key="+secretKey;
 
-        final RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-
-        final StringRequest stringRequest = new StringRequest(Request.Method.GET, sendUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, sendUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -57,17 +54,17 @@ public class RequestSender {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                         Toast.makeText(context,"Gönderim Hatası"+error.getMessage(),Toast.LENGTH_SHORT).show();
                     }
         });
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         queue.add(stringRequest);
+        queue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                queue.getCache().clear();
+            }
+        });
     }
 
     static String sha1(String input) throws NoSuchAlgorithmException {
@@ -81,8 +78,6 @@ public class RequestSender {
     }
 
     static String getDateNow(){
-        //SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH:mm:ss");
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'-'HH");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }
